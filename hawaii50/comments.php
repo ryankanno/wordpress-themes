@@ -28,36 +28,36 @@
     <?php foreach ($comments as $comment) : ?>
         <?php $i++; ?>
         <li <?php if($comment->comment_author == "ryankanno" && $comment->comment_author_email == 'ryankanno@localkinegrinds.com') echo ' class="clearfix admin" '; else echo $oddcomment; ?>id="comment-<?php comment_ID() ?>" class="clearfix">
-                <table cellspacing=0 cellpadding=0 border=0>
-                <tr valign="top">
-                    <td>
-                        <div class="gravatar">
-                        <?php 
-                        $size = 64;
-                        if (function_exists('get_avatar')) {
-                            echo get_avatar($comment, $size);
-                        } else {
-                            //alternate gravatar code for < 2.5
-                            $grav_url = "http://www.gravatar.com/avatar.php?gravatar_id=" . md5($email) . "&default=" . urlencode($default) . "&size=" . $size;
-                            echo "<img src='$grav_url'/>";
-                        } ?>
+            <table cellspacing=0 cellpadding=0 border=0>
+            <tr valign="top">
+                <td>
+                    <div class="gravatar">
+                    <?php 
+                    $size = 64;
+                    if (function_exists('get_avatar')) {
+                        echo get_avatar($comment, $size);
+                    } else {
+                        //alternate gravatar code for < 2.5
+                        $grav_url = "http://www.gravatar.com/avatar.php?gravatar_id=" . md5($email) . "&default=" . urlencode($default) . "&size=" . $size;
+                        echo "<img src='$grav_url'/>";
+                    } ?>
+                    </div>
+                </td>
+                <td>
+                    <div class="comment">
+                        <div class="comment-metadata">
+                            <?php if ($comment->comment_approved == '0') : ?>
+                                <div class="moderated">Your comment is awaiting moderation.</div>
+                            <?php endif; ?>
+                            <span class="comment-author"><?php comment_author_link() ?> says</span>:<br/>
+                            <a href="#comment-<?php comment_ID() ?>" title=""><?php comment_date('F jS, Y') ?> at <?php comment_time() ?></a> <?php edit_comment_link('edit','|&nbsp;',''); ?>
                         </div>
-                    </td>
-                    <td>
-                        <div class="comment">
-                            <div class="comment-metadata">
-                                <?php if ($comment->comment_approved == '0') : ?>
-                                    <div class="moderated">Your comment is awaiting moderation.</div>
-                                <?php endif; ?>
-                                <span class="comment-author"><?php comment_author_link() ?> says</span>:<br/>
-                                <a href="#comment-<?php comment_ID() ?>" title=""><?php comment_date('F jS, Y') ?> at <?php comment_time() ?></a> <?php edit_comment_link('edit','|&nbsp;',''); ?>
-                            </div>
-                            <?php comment_text() ?>
-                        </div>
-                    </td>
-                </tr>
-                </table>
-    </li>
+                        <?php comment_text() ?>
+                    </div>
+                </td>
+            </tr>
+            </table>
+        </li>
 
     <?php
     /* Changes every other comment to a different class */
